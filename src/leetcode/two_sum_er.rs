@@ -15,6 +15,7 @@ use std::collections::HashMap;
 ///
 /// If the target sum cannot be found in the array, `None` is returned.
 ///
+
 pub fn two_sum(nums: Vec<i32>, target: i32) -> Option<(usize, usize)> {
     // This HashMap is used to look up a corresponding index in the `nums` list.
     // Given that we know where we are at in the array, we can look up our
@@ -31,9 +32,11 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Option<(usize, usize)> {
     // the number we just inserted might be the perfect distance for another
     // number, and we've found a match!
     //
+    println!("Im in two_sum_er.rs");
     let mut distance_table: HashMap<i32, usize> = HashMap::new();
 
     for (i, current_value) in nums.iter().enumerate() {
+        println!("i: {}, current_value: {}", i, current_value);
         match distance_table.get(&(target - current_value)) {
             Some(j) => return Some((i, *j)),
             _ => distance_table.insert(*current_value, i),
@@ -47,11 +50,13 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Option<(usize, usize)> {
 #[cfg(test)]
 mod test {
     use super::*;
+    use std::println;
 
     #[test]
     fn test() {
         let nums = vec![2, 7, 11, 15];
-        assert_eq!(two_sum(nums, 9123), Some((1, 0)));
+        println!("nums: {:?}", nums);
+        assert_eq!(two_sum(nums, 9), Some((1, 0)));
 
         let nums = vec![3, 2, 4];
         assert_eq!(two_sum(nums, 6), Some((2, 1)));
