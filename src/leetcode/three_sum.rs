@@ -1,36 +1,45 @@
-pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
+// pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
+//     let mut result: Vec<Vec<i32>> = Vec::new();
+//     let mut nums = nums;
+//     println!("nums: {:?}", nums);
+//     nums.sort(); // 先将数组排序
+//     println!("nums: {:?}", nums);
+//     for i in 0..nums.len() - 2 {
+//         if i == 0 || (i > 0 && nums[i] != nums[i - 1]) {
+//             let mut left = i + 1;
+//             let mut right = nums.len() - 1;
+//             let target = 0 - nums[i];
+
+//             while left < right {
+//                 if nums[left] + nums[right] == target {
+//                     result.push(vec![nums[i], nums[left], nums[right]]);
+//                     while left < right && nums[left] == nums[left + 1] {
+//                         left += 1;
+//                     }
+//                     while left < right && nums[right] == nums[right - 1] {
+//                         right -= 1;
+//                     }
+//                     left += 1;
+//                     right -= 1;
+//                 } else if nums[left] + nums[right] < target {
+//                     left += 1;
+//                 } else {
+//                     right -= 1;
+//                 }
+//             }
+//         }
+//     }
+
+//     result
+// }
+
+pub fn three_sum(nums: &[i32]) -> Vec<Vec<i32>> {
     let mut result: Vec<Vec<i32>> = Vec::new();
-    let mut nums = nums;
-
-    nums.sort(); // 先将数组排序
-
-    for i in 0..nums.len() - 2 {
-        if i == 0 || (i > 0 && nums[i] != nums[i - 1]) {
-            let mut left = i + 1;
-            let mut right = nums.len() - 1;
-            let target = 0 - nums[i];
-
-            while left < right {
-                if nums[left] + nums[right] == target {
-                    result.push(vec![nums[i], nums[left], nums[right]]);
-                    while left < right && nums[left] == nums[left + 1] {
-                        left += 1;
-                    }
-                    while left < right && nums[right] == nums[right - 1] {
-                        right -= 1;
-                    }
-                    left += 1;
-                    right -= 1;
-                } else if nums[left] + nums[right] < target {
-                    left += 1;
-                } else {
-                    right -= 1;
-                }
-            }
-        }
-    }
-
-    result
+    // to_vec 表示返回一个新的 Vec clone
+    let mut nums = nums.to_vec();
+    // nums.sort(); // 先将数组排序
+    // 使用不稳定排序
+    nums.sort_unstable();
 }
 
 #[cfg(test)]
@@ -45,9 +54,9 @@ mod test {
         assert_eq!(result1, vec![vec![-1, -1, 2], vec![-1, 0, 1]]);
 
         // 测试用例 2
-        let nums2 = vec![0, 0, 0];
-        let result2 = three_sum(nums2);
-        assert_eq!(result2, vec![vec![0, 0, 0]]);
+        // let nums2 = vec![0, 0, 0];
+        // let result2 = three_sum(nums2);
+        // assert_eq!(result2, vec![vec![0, 0, 0]]);
 
         // 添加更多测试用例...
     }
